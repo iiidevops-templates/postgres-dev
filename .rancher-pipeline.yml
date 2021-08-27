@@ -1,6 +1,6 @@
 stages:
-- name: Deploy--DB
-  iiidevops: deployed-environments
+- iiidevops: deployed-environments
+  name: Deploy--DB
   steps:
   - applyAppConfig:
       answers:
@@ -21,10 +21,9 @@ stages:
   when:
     branch:
       include:
-      - master
-
-- name: Deploy--Wait DB deployment
-  iiidevops: deployed-environments
+      - skip
+- iiidevops: deployed-environments
+  name: Deploy--Wait DB deployment
   steps:
   - env:
       deploy_name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db
@@ -45,4 +44,3 @@ stages:
     branch:
       include:
       - master
-
