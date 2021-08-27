@@ -22,6 +22,7 @@ stages:
     branch:
       include:
       - master
+
 - name: Deploy--Wait DB deployment
   iiidevops: deployed-environments
   steps:
@@ -44,3 +45,4 @@ stages:
     branch:
       include:
       - master
+
