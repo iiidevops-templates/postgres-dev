@@ -26,7 +26,7 @@ stages:
   when:
     branch:
       include:
-      - master
+      - skip-master
 
 - name: Deploy--Wait DB deployment
   iiidevops: deployed-environments
@@ -49,5 +49,5 @@ stages:
   when:
     branch:
       include:
-      - master
+      - skip-master
 
