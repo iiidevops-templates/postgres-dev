@@ -15,7 +15,7 @@ stages:
         git.repoName: ${CICD_GIT_REPO_NAME}
         git.url: ${CICD_GIT_URL}
         harbor.host: harbor-dev3.iiidevops.org
-        volumeMounts.enabled: false
+        volumeMounts.enabled: true
         volumeMounts.project : ${CICD_GIT_REPO_NAME}
         volumeMounts.uuid : fd086910-b212-11ec-9a09-5ed3230a7360
         volumeMounts.mountPath: '/project-data'        
