@@ -15,10 +15,14 @@ stages:
         git.repoName: ${CICD_GIT_REPO_NAME}
         git.url: ${CICD_GIT_URL}
         harbor.host: harbor-dev3.iiidevops.org
+        volumeMounts.enabled: true
+        volumeMounts.project : ${CICD_GIT_REPO_NAME}
+        volumeMounts.uuid : fd086910-b212-11ec-9a09-5ed3230a7360
+        volumeMounts.mountPath: '/project-data'        
       catalogTemplate: cattle-global-data:iii-dev-charts3-db
       name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db
       targetNamespace: ${CICD_GIT_REPO_NAME}
-      version: 0.3.3
+      version: 0.3.4
   when:
     branch:
       include:
