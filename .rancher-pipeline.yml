@@ -7,11 +7,11 @@ stages:
       sourceName: nexus
       targetKey: api_origin
     runScriptConfig:
-      image: iiiorg/rancher-cli:v2.4.6
+      image: iiiorg/rancher-cli:1.0.1
       shellScript: curl --location -s --request POST ${api_origin}/rancher/delete_app
         --form project_name=${CICD_GIT_REPO_NAME} --form branch_name=${CICD_GIT_BRANCH}
         && curl --location -s --request POST ${api_origin}/project/issues_commit_by_name
-        --form project_name=${CICD_GIT_REPO_NAME}
+        --form project_name=${CICD_GIT_REPO_NAME} && count-src.pl
 - name: Deploy--DB
   iiidevops: deployed-environments
   steps:
@@ -30,8 +30,8 @@ stages:
         harbor.host: harbor-dev3.iiidevops.org
         volumeMounts.nfs.enabled: false
         volumeMounts.nfs.server: 10.20.0.100
-        volumeMounts.project: ${CICD_GIT_REPO_NAME}
-        volumeMounts.uuid: fd086910-b212-11ec-9a09-5ed3230a7360
+        volumeMounts.project : ${CICD_GIT_REPO_NAME}
+        volumeMounts.uuid : fd09f2da-b212-11ec-9a09-5ed3230a7360
       catalogTemplate: cattle-global-data:iii-dev-charts3-db
       name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-db
       targetNamespace: ${CICD_GIT_REPO_NAME}
@@ -39,7 +39,7 @@ stages:
   when:
     branch:
       include:
-      - master
+      - skip-master
 - name: Deploy--Wait DB deployment
   iiidevops: deployed-environments
   steps:
@@ -61,4 +61,4 @@ stages:
   when:
     branch:
       include:
-      - master
+      - skip-master
